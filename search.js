@@ -12,12 +12,13 @@ function sleep(milliseconds) { //delay function to allow google to load
 (async () => {
    const browser = await puppeteer.launch();
    const page = await browser.newPage();
-   await page.goto('https://google.com');
+   await page.goto('https://www.safeway.com/home.html');
 
-   await page.type("input.gLFyf.gsfi", 'javascript example'); //input 
+   await page.type("#search-img", 'apples'); //input 
    await page.keyboard.press('Enter');
-   sleep(1000);
+   sleep(20000000000000);
    //page.click("input.gNO89b");
    await page.screenshot({path : "google1.png"});
+
    browser.close();
 })();

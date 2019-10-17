@@ -39,15 +39,36 @@ standard_input.on('data',function(data) {
 	}
 	else {
 		console.log('User Input Data :' + data);
+    if(data.length == 5) {
+      url = setCharAt(url, 47, 'p')
+      url = setCharAt(url,48,'e')
+      url = setCharAt(url,49,'a')
+      url = setCharAt(url,50,'r')
+      url = setCharAt(url,51,'s')
+    }
 	}
 });
-url = setCharAt(url, 47, 'p')
+
+
+url = setCharAt(url,47, 'p')
 url = setCharAt(url,48,'e')
 url = setCharAt(url,49,'a')
 url = setCharAt(url,50,'r')
 url = setCharAt(url,51,'s')
 
 console.log(url);
+/*
+function setURL(str,input) {
+  if(input.length == 5) {
+    url = setCharAt(url, 47, input.charAt(0))
+    url = setCharAt(url,48,input.charAt(0))
+    url = setCharAt(url,49,input.charAt(0))
+    url = setCharAt(url,50,input.charAt(0))
+    url = setCharAt(url,51,input.charAt(0))
+  }
+}
+
+*/
 
 function setCharAt(str, index, chr) {
 	if(index > str.length-1) 
@@ -57,8 +78,12 @@ function setCharAt(str, index, chr) {
 
 
 
+
 puppeteer
-  .launch()
+.launch()
+  
+
+  //.launch()
 
   .then(function(browser) {
     return browser.newPage();
