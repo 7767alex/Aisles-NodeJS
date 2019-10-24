@@ -1,3 +1,9 @@
+
+exports.SayHello = function() {
+  return console.log("HELLO");
+};
+
+
 const puppeteer = require('puppeteer');
 const readline = require('readline');
 
