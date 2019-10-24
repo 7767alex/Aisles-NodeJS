@@ -22,7 +22,10 @@ var food = 'apple';
 var food2 = 'pear';
 var food3 = 'water';
 
-var pathExample
+
+var pathExample = ref.push(food);
+var pathExample = ref.push(food2);
+var pathExample = ref.push(food3);
 
 var payload = {
 	'logKey': messageRef.key,
@@ -46,6 +49,10 @@ var payload2 = {
 ref.update(payload); // update lets you update your database realtime without this
 					 //this line of code the database wouldn't be updated 
 ref.update(payload1);
+ref.update(payload2);
+
+ref.remove(); //This line of code deletes everything in the path of the database where
+              //the data is being put into 
 
 logsRef.child(messageRef.key).set(message);
 
@@ -64,7 +71,7 @@ ref.child('logs').on('child_changed', function(snap) {	// To be used to keep app
 
 });
 
-
+//ref.remove();
 //The following block of code has been commented out becuase it returns an error
 //when the program is ran with it, it is meant to keep track of changes in logs 
 //in the database
