@@ -1,7 +1,7 @@
 
 exports.SayHello = function() {
-  return console.log("HELLO");
-};
+  //return console.log("HELLO");
+
 
 
 const puppeteer = require('puppeteer');
@@ -122,5 +122,12 @@ const getLine = (function () {
   end();
   console.log("Displaying 10 results from each page")
   await browser.close()
+  module.exports = name;
   process.exit(0);
 })()
+
+
+};
+
+
+

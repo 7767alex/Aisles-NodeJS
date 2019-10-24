@@ -4,9 +4,11 @@
 //var greet = require("./safeway.js");
 var greet = require("./inputsearch.js");
 console.log(greet.SayHello());
+var names = greet.SayHello();
+console.log(names)
+console.log('=================');
 
-
-var firebase = require('firebase').initializeApp({
+var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
 	serviceAccount: "./service-account-key.json",
 	databaseURL: "https://csci150team6.firebaseio.com/"
 });
@@ -60,6 +62,9 @@ var payload2 = {
 	'path/food3' : food3
 };
 
+var names = greet.SayHello();
+console.log(names)
+console.log('=================');
 
 // The previous two payload declarations, the second one will write over
 // the first one preventing any kind of acess to the first one
