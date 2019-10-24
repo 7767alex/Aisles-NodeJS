@@ -2,11 +2,6 @@
 
 
 //var greet = require("./safeway.js");
-var greet = require("./inputsearch.js");
-console.log(greet.SayHello());
-var names = greet.SayHello();
-console.log(names)
-console.log('=================');
 
 var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
 	serviceAccount: "./service-account-key.json",
@@ -62,6 +57,8 @@ var payload2 = {
 	'path/food3' : food3
 };
 
+var greet = require("./inputsearch.js");
+console.log(greet.SayHello());
 var names = greet.SayHello();
 console.log(names)
 console.log('=================');
