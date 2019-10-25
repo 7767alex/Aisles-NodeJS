@@ -1,9 +1,16 @@
 
 exports.SayHello = function() {
   //return console.log("HELLO");
+//};
 
 
+//var blarg = ['Coffee','water'];
+//return blarg;
+///The two previous lines of code are to test to make sure the firebase.js
+///is properly importing the inputsearch.js
 
+
+const NN = [];
 const puppeteer = require('puppeteer');
 const readline = require('readline');
 
@@ -102,6 +109,7 @@ const getLine = (function () {
   const qtys = await (await qty[i].getProperty('innerText')).jsonValue();
   const prices = await (await price[i].getProperty('innerText')).jsonValue();
   console.log(names);
+  NN.push(names)
   console.log("Quantity: " + qtys);
   console.log(prices);
   spaces(1);
@@ -124,12 +132,17 @@ const getLine = (function () {
   end();
   console.log("Displaying 10 results from each page")
   await browser.close()
-  module.exports = name;
+  //module.exports = NN;
+
+  for(var i = 0; i < NN.length; i++) {
+    console.log(NN[i]+'__');
+  }
+  return NN;
   process.exit(0);
 })()
-
-
 };
+
+
 
 
 

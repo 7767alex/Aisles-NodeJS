@@ -3,6 +3,34 @@
 
 //var greet = require("./safeway.js");
 
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo() {
+  console.log('Taking a break...');
+  await sleep(30000);
+  console.log('Two seconds later, showing sleep in a loop...');
+
+  // Sleep in loop
+  for (let i = 0; i < 5; i++) {
+    if (i === 3)
+      await sleep(30000);
+    console.log(i);
+  }
+}
+
+demo();
+
+var greet = require("./inputsearch.js");
+
+demo();
+sleep(30000);
+
+var foodArr = greet.SayHello();
+
+
 var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
 	serviceAccount: "./service-account-key.json",
 	databaseURL: "https://csci150team6.firebaseio.com/"
@@ -26,9 +54,9 @@ var payload = {
 */
 
 
-var food = 'apple';
-var food2 = 'pear';
-var food3 = 'water';
+var food = foodArr[0];
+var food2 = foodArr[1];
+var food3 = foodArr[2];
 /*
 var food = names[0];
 var food2 = names[1];
@@ -56,12 +84,13 @@ var payload2 = {
 	'logKey': messageRef.key,
 	'path/food3' : food3
 };
-
+/*
 var greet = require("./inputsearch.js");
 console.log(greet.SayHello());
 var names = greet.SayHello();
 console.log(names)
 console.log('=================');
+*/
 
 // The previous two payload declarations, the second one will write over
 // the first one preventing any kind of acess to the first one
@@ -91,45 +120,6 @@ ref.child('logs').on('child_changed', function(snap) {	// To be used to keep app
 	console.log('changed' , snap.val());
 
 });
-
-
-/*
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-  
-const puppeteer = require('puppeteer');
-
-(async () => {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-  await page.goto('https://safeway.com/')
-  sleep(2000)
-  //const name = await page.$eval('.product-title-name', aaaa => aaaa.innerText)
-  const name = await page.$$('h3');
-  const price = await page.$$('span.polaris-product-qty');
-  const m = await page.$$('span.polaris-product-saleprice.polaris-product-saleprice');
-
-  for (let i = 0; i < name.length; i++) {
-  const names = await (await name[i].getProperty('innerText')).jsonValue();
-  const prices = await (await price[i].getProperty('innerText')).jsonValue();
-  const ms = await (await m[i].getProperty('innerText')).jsonValue();
-  console.log(names);
-  console.log(prices);
-  console.log(ms)
-  console.log(" ")
-  }
-
-  //console.log(name)
-  await browser.close()
-})()
-
-*/
-
 
 
 //ref.remove();
