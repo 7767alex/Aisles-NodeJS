@@ -4,8 +4,12 @@ exports.SayHello = function() {
 //};
 
 
-//var blarg = ['Coffee','water'];
+//var blarg = ['Coffee','water','orange'];
 //return blarg;
+
+// Previous two lines of code will return the array to the firebase.js program 
+
+
 ///The two previous lines of code are to test to make sure the firebase.js
 ///is properly importing the inputsearch.js
 

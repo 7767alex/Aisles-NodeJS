@@ -23,12 +23,36 @@ async function demo() {
 
 demo();
 
-var greet = require("./inputsearch.js");
+//var greet = require("./inputsearch.js");
 
 demo();
-sleep(30000);
+sleep(3000000000000);
+console.log('hit 1');
 
-var foodArr = greet.SayHello();
+function ReturnArr(arr1) {
+	var greet = require("./inputsearch.js");
+	var arr1 = greet.SayHello();
+	console.log('hit 2');
+	return arr1;
+	
+}
+
+
+function callTest(arr2,callback) {
+	console.log('calltest hit');
+	var arr3 = callback(arr2);
+	console.log('calltest done');
+	return arr3;
+}
+
+var arr2;
+
+var foodArr = callTest(arr2,ReturnArr);
+
+
+
+//callTest(function(foodArr));
+//var foodArr = greet.SayHello();
 
 
 var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
@@ -121,6 +145,7 @@ ref.child('logs').on('child_changed', function(snap) {	// To be used to keep app
 
 });
 
+//});
 
 //ref.remove();
 //The following block of code has been commented out becuase it returns an error
@@ -135,3 +160,69 @@ ref.child('logs').on('value', function(snap) { //the value event happens anytime
 */
 
 //Changing the logs manually in firebase will display in terminal the change that occurs
+
+/*
+
+function initialize() {
+    //Geocode Address to obtin Lat and Long coordinates for the starting point of our map
+    geocoder = new google.maps.Geocoder();
+    var results = geocode(geocoder);
+    makeMap(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+
+}
+
+function geocode(geocoder) {
+    //do geocoding here...
+
+    var address = "3630 University Street, Montreal, QC, Canada";
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+           return results;
+            }
+         else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
+   });
+
+}
+
+function makeMap(lat, long) {
+  //  alert(lat); for debuging
+    var mapOptions = {
+        center: new google.maps.LatLng(lat, long),
+        zoom: 17,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+     map = new google.maps.Map(document.getElementById("map_canvas"),
+        mapOptions);
+}
+
+
+
+function initialize() {
+    //Geocode Address to obtin Lat and Long coordinates for the starting point of our map
+    geocoder = new google.maps.Geocoder();
+    geocode(geocoder, function(results) {  // instead of (var results = geocode(geocoder);)
+        // This function gets called by the geocode function on success
+        makeMap(results[0].geometry.location.lat(), results[0].geometry.location.lng());        
+    });
+}
+
+function geocode(geocoder, callback) {
+    //do geocoding here...
+
+    var address = "3630 University Street, Montreal, QC, Canada";
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            // Call the callback function instead of returning
+            callback(results);
+        } else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
+   });
+
+}
+
+*/
+
+
