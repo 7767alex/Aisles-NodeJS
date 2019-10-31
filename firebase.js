@@ -21,39 +21,49 @@ async function demo() {
   }
 }
 
-demo();
+//demo();
 
 //var greet = require("./inputsearch.js");
 
-demo();
-sleep(3000000000000);
-console.log('hit 1');
 
-function ReturnArr(arr1) {
-	var greet = require("./inputsearch.js");
-	var arr1 = greet.SayHello();
-	console.log('hit 2');
+//sleep(3000000000000);
+//console.log('hit 1');
+
+function ReturnArr(arr1,callback) {
+
+	//console.log('hit 2');
 	return arr1;
 	
 }
 
+function createArr(arr) {
+	var greet = require("./inputsearch.js");
+	var arr1 = greet.SayHello();
+	
+	console.log(arr1[0]);
+	return arr1;
+
+}
 
 function callTest(arr2,callback) {
-	console.log('calltest hit');
+	//console.log('calltest hit');
 	var arr3 = callback(arr2);
-	console.log('calltest done');
+	//console.log(arr3);
+	//console.log('calltest done');
 	return arr3;
 }
 
 var arr2;
 
-var foodArr = callTest(arr2,ReturnArr);
+var foodArr = callTest(arr2,createArr);
+//console.log(foodArr);
 
-
+FB(foodArr);
 
 //callTest(function(foodArr));
 //var foodArr = greet.SayHello();
 
+function FB(foodArr) {
 
 var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
 	serviceAccount: "./service-account-key.json",
@@ -144,6 +154,7 @@ ref.child('logs').on('child_changed', function(snap) {	// To be used to keep app
 	console.log('changed' , snap.val());
 
 });
+}
 
 //});
 

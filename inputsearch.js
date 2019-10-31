@@ -1,5 +1,5 @@
 
-exports.SayHello = function() {
+//exports.SayHello = function() {
   //return console.log("HELLO");
 //};
 
@@ -10,13 +10,12 @@ exports.SayHello = function() {
 // Previous two lines of code will return the array to the firebase.js program 
 
 
-///The two previous lines of code are to test to make sure the firebase.js
-///is properly importing the inputsearch.js
-
-
+/*
 const NN = [];
 const puppeteer = require('puppeteer');
 const readline = require('readline');
+*/
+
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -57,6 +56,45 @@ function end() {
   timeDiff /= 1000;
   console.log(timeDiff + " seconds");
 }
+
+function call(callback) {
+  callback();// => (await sapces());
+}
+
+/*
+exports.SayHello = function() {
+//var arr= ['blarg','honk','cronk'];
+//return arr;
+
+
+const NN = [];
+const puppeteer = require('puppeteer');
+const readline = require('readline');
+console.log("Wait a few seconds...");
+const rl = readline.createInterface({input: process.stdin, output: process.stdout});
+
+
+//const getLine = (function () {
+/*
+    const getLineGen = (async function* () {
+      console.log("What do you want to search for?")
+        for await (const line of rl) {
+            yield line;
+        }
+    })();
+    
+    //return async () => ((await getLineGen.next()).value);
+    //return NN;
+    //async () => (await spaces());
+    call(GetData);
+    return NN;
+    //})
+//();
+*/
+
+/*
+exports.SayHello() = function {
+
 console.log("Wait a few seconds...");
 const rl = readline.createInterface({input: process.stdin, output: process.stdout});
 const getLine = (function () {
@@ -69,8 +107,9 @@ const getLine = (function () {
     })();
     return async () => ((await getLineGen.next()).value);
 })();
+*/
 
-(async () => {
+ var(async function GetData() {//=> {
   spaces(2);
   const browser = await puppeteer.launch()
   const safeway = await browser.newPage()
@@ -83,7 +122,8 @@ const getLine = (function () {
   await Promise.all([
       walmart.click(".Search__searchIcon___3gk-N"),
   ]);
-  let a = (await getLine());
+  //let a = (await getLine());
+  a = 'apples';
   start();
   await walmart.type(".Search__searchField___3eXaL",a)
   await walmart.keyboard.press('Enter');
@@ -144,9 +184,47 @@ const getLine = (function () {
   return NN;
   process.exit(0);
 })()
+
+//module.exports.GetData = GetData;
+exports.SayHello = function() {
+//var arr= ['blarg','honk','cronk'];
+//return arr;
+
+
+const NN = [];
+const puppeteer = require('puppeteer');
+const readline = require('readline');
+console.log("Wait a few seconds...");
+const rl = readline.createInterface({input: process.stdin, output: process.stdout});
+
+
+//const getLine = (function () {
+/*
+    const getLineGen = (async function* () {
+      console.log("What do you want to search for?")
+        for await (const line of rl) {
+            yield line;
+        }
+    })();
+    */
+    //return async () => ((await getLineGen.next()).value);
+    //return NN;
+    //async () => (await spaces());
+    
+
+    GetData.then(function(result){
+      return NN;
+        //handle success
+    }, function(error){
+        console.log('error');
+    })
+
+    
+    
+    //})
+//();
+
+
 };
-
-
-
 
 
