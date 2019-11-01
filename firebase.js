@@ -38,7 +38,7 @@ function ReturnArr(arr1,callback) {
 
 function createArr(arr) {
 	var greet = require("./inputsearch.js");
-	var arr1 = greet.SayHello();
+	var arr1 = Promise.resolve(greet.SayHello());
 	
 	console.log(arr1[0]);
 	return arr1;
@@ -87,15 +87,17 @@ var payload = {
 };
 */
 
+var names = ['bla','sdflk','fads'];
 
+/*
 var food = foodArr[0];
 var food2 = foodArr[1];
 var food3 = foodArr[2];
-/*
+*/
 var food = names[0];
 var food2 = names[1];
 var food3 = names[2];
-*/
+
 
 
 var pathExample = ref.push(food);
