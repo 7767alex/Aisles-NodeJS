@@ -4,6 +4,12 @@
  * @desc Gets the text value of an element by using the page.$eval method
  *
  */
+
+exports.SayHello = function() {
+  return console.log("HELLO");
+};
+
+ 
 function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
@@ -12,6 +18,7 @@ function sleep(milliseconds) {
     }
   }
 }
+
 const puppeteer = require('puppeteer');
 
 (async () => {
