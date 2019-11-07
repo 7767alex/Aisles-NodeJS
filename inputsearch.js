@@ -108,52 +108,48 @@ const getLine = (function () {
     return async () => (( getLineGen.next()).value);
 })();
 */
- function GetData() {//=> {
-  const NN = [];
+(async function GetData () {
   spaces(2);
-  const browser =  puppeteer.launch()
-  const safeway =  browser.newPage()
-  const walmart =  browser.newPage()
-  const target =  browser.newPage()
-   safeway.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/67.0.3372.0 Safari/537.36');
-   walmart.goto('https://grocery.walmart.com/')
-   safeway.goto('https://safeway.com/')
-  console.log('getdata function');
+  const browser = await puppeteer.launch()
+  const safeway = await browser.newPage()
+  const walmart = await browser.newPage()
+  const target = await browser.newPage()
+  await safeway.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/67.0.3372.0 Safari/537.36');
+  await walmart.goto('https://grocery.walmart.com/')
+  await safeway.goto('https://safeway.com/')
 
-
-   Promise.all([
+  await Promise.all([
       walmart.click(".Search__searchIcon___3gk-N"),
   ]);
-  //let a = ( getLine());
-  a = 'apples';
+  let a = (await getLine());
   start();
-   walmart.type(".Search__searchField___3eXaL",a)
-   walmart.keyboard.press('Enter');
+  await walmart.type(".Search__searchField___3eXaL",a)
+  await walmart.keyboard.press('Enter');
   
 
-   safeway.type("#search-img", a);  
-   safeway.keyboard.press('Enter');
+  await safeway.type("#search-img", a);  
+  await safeway.keyboard.press('Enter');
   //
-   Promise.all([
+  await Promise.all([
   safeway.waitForNavigation({ waitUntil: 'networkidle2' }),
   ]);
-  const name =  safeway.$$('h3 > a');
-  const qty =  safeway.$$('.product-qty');
-  const price =  safeway.$$('.product-price');
+  const name = await safeway.$$('h3 > a');
+  const qty = await safeway.$$('.product-qty');
+  const price = await safeway.$$('.product-price');
 
-  const groc =  walmart.$$('.productTile__itemTitleOld___2rs_n');
-  const amt =  walmart.$$('.productTile__pricePerUnit___1pcv6');
-  const cost1 =  walmart.$$('span.Price__wholeUnits___1ciV_');
-  const cost2 =  walmart.$$('sup.Price__partialUnits___CYanT');
+  const groc = await walmart.$$('.productTile__itemTitleOld___2rs_n');
+  const amt = await walmart.$$('.productTile__pricePerUnit___1pcv6');
+  const cost1 = await walmart.$$('span.Price__wholeUnits___1ciV_');
+  const cost2 = await walmart.$$('sup.Price__partialUnits___CYanT');
 
   spaces(1);
 
   console.log("--- Safeway ---") 
   //for (let i = 0; i < name.length; i++) {
   for (let i = 0; i < 10; i++) {
-  const names =  ( name[i].getProperty('innerText')).jsonValue();
-  const qtys =  ( qty[i].getProperty('innerText')).jsonValue();
-  const prices =  ( price[i].getProperty('innerText')).jsonValue();
+  const names = await (await name[i].getProperty('innerText')).jsonValue();
+  const qtys = await (await qty[i].getProperty('innerText')).jsonValue();
+  const prices = await (await price[i].getProperty('innerText')).jsonValue();
   console.log(names);
   NN.push(names)
   console.log("Quantity: " + qtys);
@@ -165,10 +161,10 @@ const getLine = (function () {
   console.log("--- Walmart ---")
   // for (let i = 0; i < amt.length; i++) {
   for (let i = 0; i < 10; i++) {
-  const grocs =  ( groc[i].getProperty('innerText')).jsonValue();
-  const costs1 =  ( cost1[i].getProperty('innerText')).jsonValue();
-  const costs2 =  ( cost2[i].getProperty('innerText')).jsonValue();  
-  const amts =  ( amt[i].getProperty('innerText')).jsonValue();
+  const grocs = await (await groc[i].getProperty('innerText')).jsonValue();
+  const costs1 = await (await cost1[i].getProperty('innerText')).jsonValue();
+  const costs2 = await (await cost2[i].getProperty('innerText')).jsonValue();  
+  const amts = await (await amt[i].getProperty('innerText')).jsonValue();
   console.log(grocs);
   outParen(amts);
   console.log("$"+costs1+"."+costs2);
@@ -177,16 +173,15 @@ const getLine = (function () {
 
   end();
   console.log("Displaying 10 results from each page")
-   browser.close()
+  await browser.close()
   //module.exports = NN;
 
   for(var i = 0; i < NN.length; i++) {
     console.log(NN[i]+'__');
   }
   return NN;
-  //process.exit(0);
-} 
-
+  process.exit(0);
+})();
 
 
 function GetTest() {
