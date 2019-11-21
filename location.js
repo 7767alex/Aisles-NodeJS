@@ -1,35 +1,37 @@
 // Import Admin SDK
+var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
+  serviceAccount: "./service-account-key.json",
+  databaseURL: "https://csci150team6.firebaseio.com/"
+});
+
 const NN = [];
 const puppeteer = require('puppeteer');
 var distance = require('google-distance');
 var NodeGeocoder = require('node-geocoder');
 var readline = require('readline')
 var search = "";
-var random_useragent = require('random-useragent');
+// var random_useragent = require('random-useragent');
  // gets a random user agent string
-
-var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
-  serviceAccount: "./service-account-key.json",
-  databaseURL: "https://csci150team6.firebaseio.com/"
-});
-
-//Here 
-//Require for firebase and declaration of InitializeApp can be done in the same
-//line, the objects service account key and database url in the next two lines
-// var message = {text: 'Hey guys', timestamp: new Date().toString()}; // message to be pushed with time stamp
-// var ref = firebase.database().ref().child('node-client'); //database().ref(path to  anythign)
-// var ref2 = firebase.database().ref().child('search');
-// var logsRef = ref.child('logs');      //logs is a branch in the database
-// var messagesRef = ref.child('messages');  //messages is a branch in the database 
-// var messageRef = messagesRef.push(message); //push key for datatbase to keep track
-//Here
-
-distance.apiKey = 'AIzaSyBv1UjzSQUIX9j2kBsrcZZ_zQoCGWKISb8'
-
-//npm install @google/maps
+ //npm install @google/maps
 //npm install google-distance
 //npm install node-geocoder
 //npm install gps
+
+
+// Here 
+// Require for firebase and declaration of InitializeApp can be done in the same
+// line, the objects service account key and database url in the next two lines
+var message = {text: 'Hey guys', timestamp: new Date().toString()}; // message to be pushed with time stamp
+var ref = firebase.database().ref().child('node-client'); //database().ref(path to  anythign)
+var ref2 = firebase.database().ref().child('search');
+var logsRef = ref.child('logs');      //logs is a branch in the database
+var messagesRef = ref.child('messages');  //messages is a branch in the database 
+var messageRef = messagesRef.push(message); //push key for datatbase to keep track
+// Here
+
+distance.apiKey = 'AIzaSyBv1UjzSQUIX9j2kBsrcZZ_zQoCGWKISb8'
+
+
 
 var options = {
   provider: 'google',
@@ -148,6 +150,7 @@ async function getData(searchbar,selector,itemn,itemp,itemq,data,pageid) {
         productQuantity: quantities,location:data}];
       NN.push(temp);
     }
+    // return NN;
   }
   catch(e) {
     console.log("Error! Getting Data");
@@ -205,22 +208,20 @@ function callTest(arr2,callback) {
 
 var arr2;
 
-//var foodArr = callTest(arr2,createArr);
-//console.log(foodArr);
+// var foodArr = callTest(arr2,createArr);
+// console.log(foodArr);
 
-//FB(foodArr);
+// FB(foodArr);
 
-//callTest(function(foodArr));
-//var foodArr = greet.SayHello();
+// callTest(function(foodArr));
+// var foodArr = greet.SayHello();
 
-//Here
-// ref2.once("value", function(snapshot) {
-//   var data = snapshot.val();   //Data is in JSON format.
-//   console.log(data);
-//   console.log(typeof data);
-//   search = data;
-// });
-//Here
+ref2.once("value", function(snapshot) {
+  var data = snapshot.val();   //Data is in JSON format.
+  console.log(data);
+  console.log(typeof data);
+  search = data;
+});
 
 console.log(typeof search);
 
@@ -228,102 +229,101 @@ console.log(typeof search);
 function FB(NN,search) {
   console.log(search);
 }
-/*  
 
-var firebase = require('firebase').initializeApp({  //$ npm install --save firebase
-	serviceAccount: "./service-account-key.json",
-	databaseURL: "https://csci150team6.firebaseio.com/"
-});
+async function addBase (NN) {
+  // console.log('FB Hit');
+  const array = [];
+  const payload = [];
+  for (let i=0; i<NN.length;i++) {
+    array.push(NN[i]);
+    // var food0 = NN[0];
+    // var food1 = NN[1]
+    // var food2 = NN[2];
+    // var food3 = NN[3];
+    // var food4 = NN[4];
+    // var food5 = NN[4];
+  }
 
-//Require for firebase and declaration of InitializeApp can be done in the same
-//line, the objects service account key and database url in the next two lines
-
-var message = {text: 'Hey guys', timestamp: new Date().toString()}; // message to be pushed with time stamp
-var ref = firebase.database().ref().child('node-client'); //database().ref(path to  anythign)
-var logsRef = ref.child('logs');			//logs is a branch in the database
-var messagesRef = ref.child('messages');	//messages is a branch in the database 
-var messageRef = messagesRef.push(message); //push key for datatbase to keep track
-
-*/
-/*
-console.log('FB Hit');
-
-var food0 = NN[0];
-var food1 = NN[1]
-var food2 = NN[2];
-var food3 = NN[3];
-var food4 = NN[4];
-
-var pathExample = ref.push(food0);
-var pathExample = ref.push(food1);
-var pathExample = ref.push(food2);
-var pathExample = ref.push(food3);
-var pathExample = ref.push(food4);
-
-
-
-var payload0 = {
-	'logKey': messageRef.key,
-	'path/food0' : food0
-};
-
-var payload1 = {
-	'logKey': messageRef.key,
-	'path/food1' : food1
-};	
-
-var payload2 = {
-	'logKey': messageRef.key,
-	'path/food2' : food2
-};
-
-var payload3 = {
-  'logKey': messageRef.key,
-  'path/food3' : food3
-};
-
-var payload4 = {
-  'logKey': messageRef.key,
-  'path/food4' : food4
-};
-
-ref.update(payload0); // update lets you update your database realtime without this
-					 //this line of code the database wouldn't be updated 
-ref.update(payload1);
-ref.update(payload2);
-ref.update(payload3);
-ref.update(payload4);
-ref.update(payload5);
-
-////ref.remove(); //This line of code deletes everything in the path of the database where
-              //the data is being put into 
-
-ref.once("value", function(snapshot) {
-  var data = snapshot.val();   //Data is in JSON format.
-  console.log(data);
-});
-
-logsRef.child(messageRef.key).set(message);
-
-
-logsRef.orderByKey().limitToLast(1).on('child_added', function(snap) {
-	logsRef.child('count').transaction(function(i) { //Increment the
-		return 1 + i;
-	});
-	console.log('added', snap.val());
-});
-logsRef.on('child_removed', function(snap) {			// To be used to keep apps in sync
-	console.log('removed', snap.val());
-});
-
-ref.child('logs').on('child_changed', function(snap) {	// To be used to keep apps in sync 
-	console.log('changed' , snap.val());
-
-});
+  for (let i=0; i<array.length;i++) {
+  var pathExample = ref.push(array[i]);
+  // var pathExample = ref.push(food1);
+  // var pathExample = ref.push(food2);
+  // var pathExample = ref.push(food3);
+  // var pathExample = ref.push(food4);
+  // var pathExample = ref.push(food5);
 }
 
-*/
-//Firebase Commented---
+  for (let i=0; i<array.length;i++) {
+    payload.push({
+    'logKey': messageRef.key,
+    'path/food0' : array[i]
+    });
+  }
+  for(let i=0;i<array.length;i++) {
+    ref.update(payload[i]);
+  }
+
+  // var payload0 = {
+  //   'logKey': messageRef.key,
+  //   'path/food0' : food0
+  // };
+
+  // var payload1 = {
+  //   'logKey': messageRef.key,
+  //   'path/food1' : food1
+  // };  
+
+  // var payload2 = {
+  //   'logKey': messageRef.key,
+  //   'path/food2' : food2
+  // };
+
+  // var payload3 = {
+  //   'logKey': messageRef.key,
+  //   'path/food3' : food3
+  // };
+
+  // var payload4 = {
+  //   'logKey': messageRef.key,
+  //   'path/food4' : food4
+  // };
+  // var payload5 = {
+  //   'logKey': messageRef.key,
+  //   'path/food4' : food5
+  // };
+
+  // ref.update(payload0); // update lets you update your database realtime without this
+  //            //this line of code the database wouldn't be updated 
+  // ref.update(payload1);
+  // ref.update(payload2);
+  // ref.update(payload3);
+  // ref.update(payload4);
+  // ref.update(payload5);
+
+
+  ref.once("value", function(snapshot) {
+    var data = snapshot.val();   //Data is in JSON format.
+    console.log(data);
+  });
+
+  // logsRef.child(messageRef.key).set(message);
+
+
+  logsRef.orderByKey().limitToLast(1).on('child_added', function(snap) {
+    logsRef.child('count').transaction(function(i) { //Increment the
+      return 1 + i;
+    });
+    console.log('added', snap.val());
+  });
+  logsRef.on('child_removed', function(snap) {      // To be used to keep apps in sync
+    console.log('removed', snap.val());
+  });
+
+  ref.child('logs').on('child_changed', function(snap) {  // To be used to keep apps in sync 
+    console.log('changed' , snap.val());
+
+  });
+}
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -377,7 +377,9 @@ function getDistance(foo,bar) {
 });
 }
 
-puppeteer.launch({headless:true}).then(async browser => {
+
+(async function GetData () {
+  puppeteer.launch({headless:true}).then(async browser => {
   
   const promises = [];
   var array = [];
@@ -599,6 +601,14 @@ promises.push(browser.newPage().then(async page5 => {
 
 await Promise.all(promises);
 await browser.close();
+var temp1 = [{productName: '',
+        productPrice: 0,
+        productQuantity: '',location:'3'}];
+NN.push(temp1)
 console.log(NN);
+addBase(NN);
+// FB(NN,search);
+return NN;
 // process.exit(0);
-});
+})
+})();
